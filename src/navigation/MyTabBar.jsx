@@ -1,16 +1,17 @@
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import Home from '../screens/Home';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { Text } from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import Category from '../screens/Category';
 import CheckOut from '../screens/CheckOut';
+import Home from '../screens/Home';
 
 const Tab = createBottomTabNavigator();
 
 function MyTabBar() {
   return (
     <Tab.Navigator
-      screenOptions={({route}) => ({
-        tabBarIcon: ({focused, color, size}) => {
+      screenOptions={({ route }) => ({
+        tabBarIcon: ({ focused, color, size }) => {
           let iconName;
           if (route.name === 'Home') {
             iconName = focused ? 'home' : 'home-outline';
@@ -26,7 +27,7 @@ function MyTabBar() {
             <MaterialCommunityIcons name={iconName} color={color} size={size} />
           );
         },
-        tabBarActiveTintColor: 'green',
+        tabBarActiveTintColor: 'red',
         tabBarInactiveTintColor: 'gray',
         tabBarStyle: {
           borderTopWidth: 2,
@@ -34,7 +35,7 @@ function MyTabBar() {
           shadowOpacity: 0.5,
           height: 65,
           shadowColor: 'black',
-          backgroundColor: 'purple',
+          backgroundColor: 'orange',
           shadowRadius: 10,
           shadowOffset: {
             width: 0,
@@ -48,6 +49,17 @@ function MyTabBar() {
         },
         headerShown: false,
         tabBarHideOnKeyboard: true,
+        tabBarLabel: ({ focused, color, size }) => {
+          return (
+            <Text
+              style={{
+                color: focused ? 'white' : 'gray',
+                fontSize: 12,
+              }}>
+              {route.name}
+            </Text>
+          );
+        },
       })}>
       <Tab.Screen name="Home" component={Home} />
       <Tab.Screen name="Category" component={Category} />

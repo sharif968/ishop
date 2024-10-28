@@ -1,11 +1,11 @@
+import { NavigationContainer } from '@react-navigation/native';
 import * as React from 'react';
-import {NavigationContainer} from '@react-navigation/native';
-import MyTabBar from './components/MyTabBar';
+import AppStack from './navigation/AppStack';
 
 const App = () => {
   return (
     <NavigationContainer>
-      <MyTabBar />
+      <AppStack />
     </NavigationContainer>
   );
 };

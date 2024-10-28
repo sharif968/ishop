@@ -1,15 +1,15 @@
-import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
+import React from 'react';
+import { StyleSheet, Text, View } from 'react-native';
 
 const Category = () => {
   return (
     <View style={styles.container}>
       <Text style={styles.text}>Category</Text>
     </View>
-  )
-}
+  );
+};
 
-export default Category
+export default Category;
 
 const styles = StyleSheet.create({
   container: {

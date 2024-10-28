@@ -1,15 +1,13 @@
+import { useNavigation } from '@react-navigation/native';
 import React from 'react';
 import {
-  View,
+  Alert,
+  FlatList,
+  SafeAreaView,
   Text,
   TouchableOpacity,
-  Alert,
-  SafeAreaView,
-  FlatList,
-  StyleSheet,
-  ScrollView,
+  View,
 } from 'react-native';
-import {useNavigation} from '@react-navigation/native';
 import ProductCard from '../components/ProductCard';
 
 export default function HomeScreen() {
@@ -70,42 +68,37 @@ export default function HomeScreen() {
   const navigation = useNavigation();
 
   return (
-    <View style={{flex: 1, padding: 20}}>
-      <View
-        style={{
-          flexDirection: 'row',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          marginBottom: 20,
-        }}>
-        <Text style={{fontSize: 24}}>All Products</Text>
-        <TouchableOpacity onPress={() => navigation.navigate('CheckOut')}>
-          <Text style={{fontSize: 18}}>🛒 Cart</Text>
-        </TouchableOpacity>
-      </View>
-
+    <SafeAreaView style={{ flex: 1, padding: 12 }}>
       <FlatList
+        ListHeaderComponent={<>
+          <View
+            style={{
+              flexDirection: 'row',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+              marginBottom: 20,
+            }}>
+            <Text style={{ fontSize: 24 }}>All Products</Text>
+            <TouchableOpacity onPress={() => navigation.navigate('CheckOut')}>
+              <Text style={{ fontSize: 18 }}>🛒 Cart</Text>
+            </TouchableOpacity>
+          </View></>}
         data={products}
-        renderItem={({item}) => (
-          <View style={styles.cardContainer}>
-            <ProductCard
-              image={item.image}
-              title={item.title}
-              price={item.price}
-              onAddToCart={handleAddToCart}
-            />
-          </View>
+        contentContainerStyle={{ paddingBottom: 100 }}
+        renderItem={({ item }) => (
+          <ProductCard
+            image={item.image}
+            title={item.title}
+            price={item.price}
+            onAddToCart={handleAddToCart}
+          />
         )}
+
         keyExtractor={item => item.id}
         numColumns={2}
+
       />
-    </View>
+    </SafeAreaView>
+
   );
 }
-
-const styles = StyleSheet.create({
-  cardContainer: {
-    flex: 1,
-    padding: 6,
-  },
-});
