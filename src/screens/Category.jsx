@@ -3,12 +3,23 @@ import React from 'react'
 
 const Category = () => {
   return (
-    <View>
-      <Text>Category</Text>
+    <View style={styles.container}>
+      <Text style={styles.text}>Category</Text>
     </View>
   )
 }
 
 export default Category
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: 'blue',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  text: {
+    fontSize: 20,
+    fontWeight: 'bold',
+  },
+});
