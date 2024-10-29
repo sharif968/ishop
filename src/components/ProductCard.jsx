@@ -11,23 +11,23 @@ const ProductCard = ({ image, title, price, onAddToCart }) => {
 
   return (
     <TouchableOpacity
-      onPress={()=>navigation.navigate('ProductDetails',{
+      onPress={() => navigation.navigate('ProductDetails', {
         image,
         title,
         price,
       })}
-    style={styles.card}>
-      <Image source={{ uri: image }} style={styles.productImage} />
+      style={styles.card}>
+      <Image
+        resizeMode="contain"
+        source={{ uri: image }} style={styles.productImage} />
       <View style={styles.detailsContainer}>
-        <Text style={styles.productTitle}>{title}</Text>
+        <Text style={styles.productTitle}>{title.length > 20 ? title.slice(0, 16) + '...' : title}</Text>
         <Text style={styles.productPrice}>${price}</Text>
         <TouchableOpacity
-
-        style={styles.cartButton} onPress={onAddToCart}>
-          <Icon name="add-shopping-cart" size={24} color="#333" />
+          style={styles.cartButton} onPress={onAddToCart}>
+          <Icon name="add-shopping-cart" size={20} color="#fff" />
         </TouchableOpacity>
       </View>
-
     </TouchableOpacity>
   );
 };
@@ -35,9 +35,9 @@ const ProductCard = ({ image, title, price, onAddToCart }) => {
 const styles = StyleSheet.create({
   card: {
     width: width / 2 - 32,
-    height: width / 1.3,
+    height: width / 1.4,
     borderRadius: 10,
-    elevation: 3,
+    elevation: 1,
     backgroundColor: '#fff',
     marginHorizontal: 10,
     marginVertical: 10,
@@ -58,6 +58,18 @@ const styles = StyleSheet.create({
   productPrice: {
     fontSize: 16,
     marginTop: 5,
+    color: '#DB312D',
+  }, cartButton: {
+    backgroundColor: '#DB312D',
+    borderRadius: 50,
+    padding: 5,
+    position: 'absolute',
+    bottom: 10,
+    right: 10,
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: 30,
+    height: 30,
   },
 });
 

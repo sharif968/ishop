@@ -17,29 +17,21 @@ function MyTabBar() {
             iconName = focused ? 'home' : 'home-outline';
           } else if (route.name === 'Category') {
             iconName = focused ? 'store' : 'store-outline';
-         
+
           } else if (route.name === 'CheckOut') {
             iconName = focused ? 'cart' : 'cart-outline';
           }
 
           return (
-            <MaterialCommunityIcons name={iconName} color={color} size={focused ? 40 : 30} />
+            <MaterialCommunityIcons name={iconName} color={color} size={focused ? 24 : 20} />
           );
         },
-        tabBarActiveTintColor: 'black',
-        tabBarInactiveTintColor: 'gray',
+        tabBarActiveTintColor: '#DB312D',
+        tabBarInactiveTintColor: '#333',
         tabBarStyle: {
-          borderTopWidth: 2,
-          elevation: 30,
-          shadowOpacity: 0.5,
-          height: 65,
-          shadowColor: 'black',
-          backgroundColor: 'orange',
-          shadowRadius: 10,
-          shadowOffset: {
-            width: 0,
-            height: 20,
-          },
+          height: 60,
+          elevation: 3,
+          borderTopWidth: 0,
           paddingBottom: 10,
           borderRadius: 30,
           marginBottom: 15,
@@ -47,14 +39,14 @@ function MyTabBar() {
           position: 'absolute',
         },
         headerShown: false,
-        tabBarShowLabel: false,
+        tabBarShowLabel: true,
         tabBarHideOnKeyboard: true,
-        tabBarLabel: ({ focused, color, size }) => {
+        tabBarLabel: ({  color, size }) => {
           return (
             <Text
               style={{
-                color: focused ? 'white' : 'gray',
-                fontSize: 12,
+                color: color,
+                fontSize: size,
               }}>
               {route.name}
             </Text>
