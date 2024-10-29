@@ -14,7 +14,7 @@ export default function AppStack() {
         }}
     >
     <Stack.Screen name="App" component={MyTabBar} />
-    <Stack.Screen name="ProductDetails" component={ProductDetails} />
+    <Stack.Screen  options={{headerShown: true}} name="ProductDetails" component={ProductDetails} />
   </Stack.Navigator>
   );
 }

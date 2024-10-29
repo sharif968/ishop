@@ -16,18 +16,17 @@ function MyTabBar() {
           if (route.name === 'Home') {
             iconName = focused ? 'home' : 'home-outline';
           } else if (route.name === 'Category') {
-            iconName = focused ? 'view-list' : 'view-list-outline';
-          } else if (route.name === 'ProductDetails') {
-            iconName = focused ? 'info' : 'info-outline';
+            iconName = focused ? 'store' : 'store-outline';
+         
           } else if (route.name === 'CheckOut') {
             iconName = focused ? 'cart' : 'cart-outline';
           }
 
           return (
-            <MaterialCommunityIcons name={iconName} color={color} size={size} />
+            <MaterialCommunityIcons name={iconName} color={color} size={focused ? 40 : 30} />
           );
         },
-        tabBarActiveTintColor: 'red',
+        tabBarActiveTintColor: 'black',
         tabBarInactiveTintColor: 'gray',
         tabBarStyle: {
           borderTopWidth: 2,
@@ -48,6 +47,7 @@ function MyTabBar() {
           position: 'absolute',
         },
         headerShown: false,
+        tabBarShowLabel: false,
         tabBarHideOnKeyboard: true,
         tabBarLabel: ({ focused, color, size }) => {
           return (
