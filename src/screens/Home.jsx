@@ -1,6 +1,5 @@
-import {useNavigation} from '@react-navigation/native';
-import {useQuery} from '@tanstack/react-query';
-import instance from '../data/data';
+import { useNavigation } from '@react-navigation/native';
+import { useQuery } from '@tanstack/react-query';
 import {
   Alert,
   FlatList,
@@ -10,6 +9,7 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
+import instance from '../api/axios';
 import ProductCard from '../components/ProductCard';
 
 const fetchData = async () => {
@@ -32,9 +32,9 @@ export default function HomeScreen() {
 
   console.log(data);
 
-  if (isLoading) return <Text >Loading...</Text>;
+  if (isLoading) {return <Text >Loading...</Text>;}
 
-  if (error) return <Text>'An error has occurred: ' + error.message </Text>;
+  if (error) {return <Text>'An error has occurred: ' + error.message </Text>;}
 
   return (
     <SafeAreaView style={{flex: 1, padding: 12, backgroundColor: '#fff'}}>
