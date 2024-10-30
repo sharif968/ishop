@@ -1,6 +1,6 @@
-import { useNavigation } from '@react-navigation/native';
-import { useQuery } from '@tanstack/react-query';
+import {useNavigation} from '@react-navigation/native';
 import {
+  ActivityIndicator,
   Alert,
   FlatList,
   SafeAreaView,
@@ -9,32 +9,27 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import instance from '../api/axios';
 import ProductCard from '../components/ProductCard';
+import {useProducts} from '../hooks/useProducts';
 
-const fetchData = async () => {
-  const response = await instance.get('/products');
-  return response.data;
-};
 export default function HomeScreen() {
-
+  const {data: products, isLoading, isError} = useProducts();
   const handleAddToCart = () => {
     Alert.alert('Product added to cart!');
   };
   const navigation = useNavigation();
 
-  const {isLoading, error, data} = useQuery({
-    queryKey: ['products'],
-    queryFn: () => fetchData(),
-    refetchOnWindowFocus: false,
-    retry: false,
-  });
+  if (isLoading) {
+    return (
+      <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+        <ActivityIndicator size="large" color={'#DB312D'} />
+      </View>
+    );
+  }
 
-  console.log(data);
-
-  if (isLoading) {return <Text >Loading...</Text>;}
-
-  if (error) {return <Text>'An error has occurred: ' + error.message </Text>;}
+  if (isError) {
+    return <Text>'An error has occurred: ' + error.message </Text>;
+  }
 
   return (
     <SafeAreaView style={{flex: 1, padding: 12, backgroundColor: '#fff'}}>
@@ -56,7 +51,7 @@ export default function HomeScreen() {
             </View>
           </>
         }
-        data={data}
+        data={products}
         contentContainerStyle={{paddingBottom: 100}}
         renderItem={({item}) => (
           <ProductCard

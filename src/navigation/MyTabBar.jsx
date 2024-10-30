@@ -31,7 +31,8 @@ function MyTabBar() {
         tabBarStyle: {
           height: 60,
           elevation: 3,
-          borderTopWidth: 0,
+          borderTopWidth: 1,
+          borderTopColor: 'grey',
           paddingBottom: 10,
           borderRadius: 30,
           marginBottom: 15,

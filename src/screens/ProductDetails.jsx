@@ -13,7 +13,9 @@ const ProductDetails = ({ route , navigation }) => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>{title}</Text>
+      <Text style={styles.text}>{title.slice(0, 20)}</Text>
+      <Text style={styles.text}>{price}</Text>
+      <Text style={styles.text}>{image}</Text>
     </View>
   );
 };
