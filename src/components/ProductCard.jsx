@@ -4,7 +4,7 @@ import { Dimensions, Image, StyleSheet, Text, TouchableOpacity, View } from 'rea
 import Icon from 'react-native-vector-icons/MaterialIcons'; // for the cart icon
 const { width } = Dimensions.get('window');
 
-const ProductCard = ({ image, title, price, onAddToCart }) => {
+const ProductCard = ({ image, title, price,description, onAddToCart }) => {
 
   const navigation = useNavigation();
 
@@ -15,6 +15,8 @@ const ProductCard = ({ image, title, price, onAddToCart }) => {
         image,
         title,
         price,
+        description
+
       })}
       style={styles.card}>
       <Image

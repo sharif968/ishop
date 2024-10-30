@@ -58,6 +58,7 @@ export default function HomeScreen() {
             image={item.image}
             title={item.title}
             price={item.price}
+            description={item.description}
             onAddToCart={handleAddToCart}
           />
         )}
