@@ -1,20 +1,25 @@
-import { View, Text } from 'react-native'
+import { View, Text,ActivityIndicator, FlatList, SafeAreaView, StatusBar ,Alert} from 'react-native'
+import ProductCard from '../components/ProductCard';
 import  { useEffect } from 'react'
 import React from 'react'
 import { useCategoryProducts } from '../hooks/useCategoryProducts';
 
 export default CategoryProductScreen  = ({navigation, route}) => {
-    console.log('route', route)
 const {category}=route.params
-const {data: products, isLoading, isError} = useCategoryProducts({category});
+const {data: products, isLoading, isError} = useCategoryProducts({categoryTitle:category});
 
-    
+
+    const handleAddToCart = () => {
+        Alert.alert('Product added to cart!');
+      };
+
+    const headerTitle = category.toUpperCase()
     useEffect(() => {
         
         navigation.setOptions({
-          headerTitle: category,
+          headerTitle: headerTitle,
         });
-      }, [navigation, category]);
+      }, [navigation, headerTitle]);
 
 
  if (isLoading) {
@@ -39,7 +44,7 @@ const {data: products, isLoading, isError} = useCategoryProducts({category});
           </>
         }
         data={products}
-        contentContainerStyle={{paddingBottom: 100}}
+        contentContainerStyle={{paddingBottom: 20}}
         renderItem={({item}) => (
           <ProductCard
             image={item.image}

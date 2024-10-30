@@ -1,11 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
 import instance from "../api/apiClient";
 
-export const useCategoryProducts = ({category}) => {
+export const useCategoryProducts = ({categoryTitle}) => {
     return useQuery({
-        queryKey: ['category' , categoryProducts],  
+        queryKey: [ "categoryTitle"],  
         queryFn: async () => {
-            const { data } = await instance.get(`/products/category/${category}`);
+            const { data } = await instance.get(`/products/category/${categoryTitle}`);
           return data ;
         },
       });
