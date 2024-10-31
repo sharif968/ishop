@@ -1,4 +1,5 @@
 import {useNavigation} from '@react-navigation/native';
+import {useState} from 'react';
 import {
   ActivityIndicator,
   Alert,
@@ -14,8 +15,17 @@ import {useProducts} from '../hooks/useProducts';
 
 export default function HomeScreen() {
   const {data: products, isLoading, isError} = useProducts();
-  const handleAddToCart = () => {
+  const [cartItems, setCartItems] = useState([]);
+  const handleAddToCart = (item) => {
+    setCartItems((prevItems) => {
+      const updatedItems = [...prevItems, item];
+      console.log("Cart Items:", updatedItems);
+      return updatedItems;
+    });
     Alert.alert('Product added to cart!');
+  };
+  const navigateToCheckout = () => {
+    navigation.navigate('CheckOut', { cartItems });
   };
   const navigation = useNavigation();
 
@@ -45,7 +55,7 @@ export default function HomeScreen() {
                 marginBottom: 20,
               }}>
               <Text style={{fontSize: 24}}>All Products</Text>
-              <TouchableOpacity onPress={() => navigation.navigate('CheckOut')}>
+              <TouchableOpacity onPress={navigateToCheckout}>
                 <Text style={{fontSize: 18}}>🛒 Cart</Text>
               </TouchableOpacity>
             </View>
@@ -59,7 +69,7 @@ export default function HomeScreen() {
             title={item.title}
             price={item.price}
             description={item.description}
-            onAddToCart={handleAddToCart}
+            onAddToCart={() => handleAddToCart(item)}
           />
         )}
         keyExtractor={item => item.id}
