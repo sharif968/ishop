@@ -32,6 +32,7 @@ export default ProductDetails;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+   
     backgroundColor: '#fff',
   },
   image: {
@@ -44,11 +45,11 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
     marginTop: -20, // overlap the image
-    elevation: 5,
-    shadowColor: '#000',
-    shadowOffset: {width: 0, height: 2},
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
+    // elevation: 5,
+    // shadowColor: '#000',
+    // shadowOffset: {width: 0, height: 2},
+    // shadowOpacity: 0.1,
+    // shadowRadius: 4,
   },
   title: {
     fontSize: 24,

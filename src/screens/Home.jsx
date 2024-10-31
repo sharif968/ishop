@@ -17,15 +17,25 @@ export default function HomeScreen() {
   const {data: products, isLoading, isError} = useProducts();
   const [cartItems, setCartItems] = useState([]);
   const handleAddToCart = (item) => {
-    setCartItems((prevItems) => {
+    setCartItems(prevItems => {
+      const itemExists = prevItems.some(cartItem => cartItem.id === item.id);
+
+      if (itemExists) {
+        Alert.alert('This item is already in your cart!');
+        return prevItems;
+      }
+
       const updatedItems = [...prevItems, item];
-      console.log("Cart Items:", updatedItems);
+      // console.log('Cart Items:', updatedItems);
+
+      Alert.alert('Product added to cart!');
+
       return updatedItems;
     });
-    Alert.alert('Product added to cart!');
   };
+
   const navigateToCheckout = () => {
-    navigation.navigate('CheckOut', { cartItems });
+    navigation.navigate('CheckOut', {cartItems});
   };
   const navigation = useNavigation();
 

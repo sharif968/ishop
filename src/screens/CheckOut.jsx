@@ -1,6 +1,6 @@
 import {FlatList, StyleSheet, Text, View} from 'react-native';
 import React from 'react';
-import {CheckoutCard} from '../components/CheckOutCard';
+import CheckOutCard from "../components/CheckOutCard"
 const CheckOut = ({route}) => {
   const {cartItems} = route.params;
 
@@ -10,24 +10,26 @@ const CheckOut = ({route}) => {
 
   if (!cartItems || cartItems.length === 0) {
     return (
-      <View style={styles.container}>
-        <Text>No items in cart</Text>
+      <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+        <Text style={{fontSize: 20, fontWeight: 'bold' , color: '#DB312D'}}>No items in cart</Text>
       </View>
     );
   }
   return (
-    <View style={styles.container}>
+    <View style={{backgroundColor: '#fff', height: '100%', width: '100%'}}>
+      <Text style={styles.text}>CheckOut</Text>
       <FlatList
         data={cartItems}
         renderItem={({item}) => (
-          <CheckoutCard
+          <CheckOutCard
             image={item.image}
             title={item.title}
             price={item.price}
-            onPurchase={ handlePurchase}
+            onPurchase={handlePurchase}
           />
         )}
         keyExtractor={item => item.id}
+        contentContainerStyle={{paddingBottom: 100}}
       />
     </View>
   );
@@ -36,13 +38,10 @@ const CheckOut = ({route}) => {
 export default CheckOut;
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
+  
   text: {
+    color: 'red',
+    textAlign: 'center',
     fontSize: 20,
     fontWeight: 'bold',
   },
