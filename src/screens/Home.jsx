@@ -12,32 +12,20 @@ import {
 } from 'react-native';
 import ProductCard from '../components/ProductCard';
 import {useProducts} from '../hooks/useProducts';
+import {useCart} from '../context/useCartContext';
 
 export default function HomeScreen() {
   const {data: products, isLoading, isError} = useProducts();
-  const [cartItems, setCartItems] = useState([]);
+  const {cartItems, addToCart} = useCart();
+
   const handleAddToCart = (item) => {
-    setCartItems(prevItems => {
-      const itemExists = prevItems.some(cartItem => cartItem.id === item.id);
-
-      if (itemExists) {
-        Alert.alert('This item is already in your cart!');
-        return prevItems;
-      }
-
-      const updatedItems = [...prevItems, item];
-      // console.log('Cart Items:', updatedItems);
-
-      Alert.alert('Product added to cart!');
-
-      return updatedItems;
-    });
+    addToCart(item);
+    Alert.alert('Product added to cart!');
   };
-
+  const navigation = useNavigation();
   const navigateToCheckout = () => {
     navigation.navigate('CheckOut', {cartItems});
   };
-  const navigation = useNavigation();
 
   if (isLoading) {
     return (
