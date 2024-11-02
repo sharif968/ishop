@@ -65,11 +65,7 @@ export default function HomeScreen() {
         contentContainerStyle={{paddingBottom: 100}}
         renderItem={({item}) => (
           <ProductCard
-            image={item.image}
-            title={item.title}
-            price={item.price}
-            description={item.description}
-            onAddToCart={() => handleAddToCart(item)}
+           item={item}
           />
         )}
         keyExtractor={item => item.id}

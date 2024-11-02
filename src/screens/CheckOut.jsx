@@ -13,7 +13,7 @@ const CheckOut = ({route}) => {
   // const {cartItems} = route.params;
   const {removeFromCart, clearCart , cartItems} = useCart();
 
-  const handleRemove = itemId => {
+  const handleRemove = (itemId) => {
     removeFromCart(itemId);
     Alert.alert('Product removed from cart!');
   };

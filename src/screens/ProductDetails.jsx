@@ -2,9 +2,9 @@ import React, {useEffect} from 'react';
 import {Image, StyleSheet, Text, View, ScrollView} from 'react-native';
 
 const ProductDetails = ({route, navigation}) => {
-  const {image, title, price, description} = route.params;
+  const {item} = route.params;
 
-  const headerTitle = title.length > 16 ? `${title.slice(0, 16)}...` : title;
+  const headerTitle = item.title.length > 16 ? `${item.title.slice(0, 16)}...` : item.title;
 
   useEffect(() => {
     navigation.setOptions({
@@ -14,14 +14,14 @@ const ProductDetails = ({route, navigation}) => {
 
   return (
     <ScrollView style={styles.container}>
-      <Image source={{uri: image}} style={styles.image} resizeMode="cover" />
+      <Image source={{uri: item.image}} style={styles.image} resizeMode="cover" />
       <View style={styles.detailsContainer}>
-        <Text style={styles.title}>{title}</Text>
-        <Text style={styles.price}>${price}</Text>
+        <Text style={styles.title}>{item.title}</Text>
+        <Text style={styles.price}>${item.price}</Text>
         <View style={styles.descriptionTitleContainer}>
           <Text style={styles.descriptionTitle}>Description</Text>
         </View>
-        <Text style={styles.description}>{description}</Text>
+        <Text style={styles.description}>{item.description}</Text>
       </View>
     </ScrollView>
   );

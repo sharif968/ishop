@@ -1,10 +1,19 @@
 import { useNavigation } from '@react-navigation/native';
 import React from 'react';
-import { Dimensions, Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Dimensions, Image, StyleSheet, Text, TouchableOpacity, View,Alert } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons'; // for the cart icon
+import { useCart } from '../context/useCartContext';
+
 const { width } = Dimensions.get('window');
 
-const ProductCard = ({ image, title, price,description, onAddToCart }) => {
+
+const ProductCard = ({ item }) => {
+  const {addToCart} = useCart();
+
+  const handleAddToCart = () => {
+    addToCart(item);
+    Alert.alert('Product added to cart!');
+  };
 
   const navigation = useNavigation();
 
@@ -12,21 +21,18 @@ const ProductCard = ({ image, title, price,description, onAddToCart }) => {
   return (
     <TouchableOpacity
       onPress={() => navigation.navigate('ProductDetails', {
-        image,
-        title,
-        price,
-        description
+        item
 
       })}
       style={styles.card}>
       <Image
         resizeMode="contain"
-        source={{ uri: image }} style={styles.productImage} />
+        source={{ uri: item.image }} style={styles.productImage} />
       <View style={styles.detailsContainer}>
-        <Text style={styles.productTitle}>{title.length > 20 ? title.slice(0, 16) + '...' : title}</Text>
-        <Text style={styles.productPrice}>${price}</Text>
+        <Text style={styles.productTitle}>{item.title.length > 20 ? item.title.slice(0, 16) + '...' : item.title}</Text>
+        <Text style={styles.productPrice}>${item.price}</Text>
         <TouchableOpacity
-          style={styles.cartButton} onPress={onAddToCart}>
+          style={styles.cartButton} onPress={handleAddToCart }>
           <Icon name="add-shopping-cart" size={20} color="#fff" />
         </TouchableOpacity>
       </View>
