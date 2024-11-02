@@ -5,7 +5,7 @@ import {
   FlatList,
   SafeAreaView,
   StatusBar,
-  Alert,
+ 
 } from 'react-native';
 import ProductCard from '../components/ProductCard';
 import {useEffect} from 'react';

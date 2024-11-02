@@ -18,8 +18,8 @@ export default function HomeScreen() {
   const {cartItems} = useCart();
 
   const navigation = useNavigation();
-  const navigateToCheckout = () => {
-    navigation.navigate('CheckOut', {cartItems});
+  const navigateToCart = () => {
+    navigation.navigate('Cart', {cartItems});
   };
 
   if (isLoading) {
@@ -64,7 +64,7 @@ export default function HomeScreen() {
                 </Text>
                 <TouchableOpacity
                   style={{marginRight: 10, position: 'relative'}}
-                  onPress={navigateToCheckout}>
+                  onPress={navigateToCart}>
                   <MaterrialIcons
                     name="shopping-cart"
                     size={30}

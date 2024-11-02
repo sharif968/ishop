@@ -1,8 +1,8 @@
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { Text } from 'react-native';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import {Text} from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import Category from '../screens/Category';
-import CheckOut from '../screens/CheckOut';
+import Cart from '../screens/Cart';
 import Home from '../screens/Home';
 
 const Tab = createBottomTabNavigator();
@@ -10,20 +10,23 @@ const Tab = createBottomTabNavigator();
 function MyTabBar() {
   return (
     <Tab.Navigator
-      screenOptions={({ route }) => ({
-        tabBarIcon: ({ focused, color, size }) => {
+      screenOptions={({route}) => ({
+        tabBarIcon: ({focused, color, size}) => {
           let iconName;
           if (route.name === 'Home') {
             iconName = focused ? 'home' : 'home-outline';
           } else if (route.name === 'Category') {
             iconName = focused ? 'store' : 'store-outline';
-
-          } else if (route.name === 'CheckOut') {
+          } else if (route.name === 'Cart') {
             iconName = focused ? 'cart' : 'cart-outline';
           }
 
           return (
-            <MaterialCommunityIcons name={iconName} color={color} size={focused ? 24 : 20} />
+            <MaterialCommunityIcons
+              name={iconName}
+              color={color}
+              size={focused ? 24 : 20}
+            />
           );
         },
         tabBarActiveTintColor: '#DB312D',
@@ -42,7 +45,7 @@ function MyTabBar() {
         headerShown: false,
         tabBarShowLabel: true,
         tabBarHideOnKeyboard: true,
-        tabBarLabel: ({  color, size }) => {
+        tabBarLabel: ({color, size}) => {
           return (
             <Text
               style={{
@@ -56,8 +59,7 @@ function MyTabBar() {
       })}>
       <Tab.Screen name="Home" component={Home} />
       <Tab.Screen name="Category" component={Category} />
-
-      <Tab.Screen name="CheckOut" component={CheckOut} />
+      <Tab.Screen name="Cart" component={Cart} />
     </Tab.Navigator>
   );
 }

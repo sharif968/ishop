@@ -1,7 +1,7 @@
 import React from 'react';
 import {StyleSheet, Text, View, Image, TouchableOpacity} from 'react-native';
 
-export default CheckOutCard = ({image, title, price, onPurchase, onRemove}) => {
+export default CartCard = ({image, title, price, onPurchase, onRemove}) => {
   return (
     <View style={styles.card}>
       <Image resizeMode="contain" source={{uri: image}} style={styles.image} />

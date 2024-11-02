@@ -1,9 +1,9 @@
-import React, {createContext, useState, useEffect, useContext, Alert} from 'react';
+import React, {createContext, useState, useEffect, useContext} from 'react';
 import AsyncStorage from "@react-native-async-storage/async-storage";
-// Create a CartContext
+import { Alert } from 'react-native';
 const CartContext = createContext();
 
-const key = 'cartItems';
+
 
 // Custom hook to use the CartContext
 export const useCart = () => useContext(CartContext);
@@ -15,7 +15,7 @@ export const CartProvider = ({children}) => {
   useEffect(() => {
     const loadCartItems = async () => {
       try {
-        const storedCartItems = await AsyncStorage.getItem(key);
+        const storedCartItems = await AsyncStorage.getItem('cartItems');
         if (storedCartItems) {
           setCartItems(JSON.parse(storedCartItems));
         }
@@ -25,28 +25,39 @@ export const CartProvider = ({children}) => {
     };
     loadCartItems();
   }, []);
+  
+   // Save cart data to AsyncStorage whenever it changes
+   useEffect(() => {
+    const saveCartItems = async () => {
+      try {
+        await AsyncStorage.setItem('cartItems', JSON.stringify(cartItems));
+      } catch (error) {
+        console.error('Failed to save cart items to AsyncStorage', error);
+      }
+    };
+    saveCartItems();
+  }, [cartItems]);
 
-
+  
   // Function to add an item to the cart
-  const addToCart = (item) => {
-    setCartItems((prevItems) => {
-      const itemExists = prevItems.some((cartItem) => cartItem.id === item.id);
+  const addToCart = item => {
+    setCartItems(prevItems => {
+      const itemExists = prevItems.some(cartItem => cartItem.id === item.id);
 
       if (itemExists) {
-        Alert.alert('Product already in cart!');
+        Alert.alert('Product already in the cart!');
         return prevItems;
       }
 
       const updatedItems = [...prevItems, item];
+      Alert.alert('Product added to the cart!');
       return updatedItems;
     });
-    await AsyncStorage.setItem(key,JSON.stringify(updatedItems));
-
   };
 
   // Function to remove an item from the cart
   const removeFromCart = itemId => {
-    Alert.alert("Do you want to remove this item?")
+    Alert.alert("Do you want to remove the item from the cart?")
     setCartItems(prevItems => prevItems.filter(item => item.id !== itemId));
   };
 
