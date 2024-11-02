@@ -1,6 +1,6 @@
 import { useNavigation } from '@react-navigation/native';
 import React from 'react';
-import { Dimensions, Image, StyleSheet, Text, TouchableOpacity, View,Alert } from 'react-native';
+import { Dimensions, Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons'; // for the cart icon
 import { useCart } from '../context/useCartContext';
 
@@ -12,7 +12,6 @@ const ProductCard = ({ item }) => {
 
   const handleAddToCart = () => {
     addToCart(item);
-    Alert.alert('Product added to cart!');
   };
 
   const navigation = useNavigation();
@@ -29,7 +28,7 @@ const ProductCard = ({ item }) => {
         resizeMode="contain"
         source={{ uri: item.image }} style={styles.productImage} />
       <View style={styles.detailsContainer}>
-        <Text style={styles.productTitle}>{item.title.length > 20 ? item.title.slice(0, 16) + '...' : item.title}</Text>
+        <Text style={styles.productTitle}>{item.title.length > 15 ? item.title.slice(0, 10) + '...' : item.title}</Text>
         <Text style={styles.productPrice}>${item.price}</Text>
         <TouchableOpacity
           style={styles.cartButton} onPress={handleAddToCart }>
@@ -43,7 +42,7 @@ const ProductCard = ({ item }) => {
 const styles = StyleSheet.create({
   card: {
     width: width / 2 - 32,
-    height: width / 1.4,
+    height: width / 1.5,
     borderRadius: 10,
     elevation: 1,
     backgroundColor: '#fff',

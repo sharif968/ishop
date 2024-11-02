@@ -1,5 +1,7 @@
-import React, {createContext, useState, useEffect, useContext, Alert} from 'react';
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import React, {createContext, useState, useEffect, useContext} from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import {Alert} from 'react-native';
+import {ToastAndroid} from 'react-native';
 // Create a CartContext
 const CartContext = createContext();
 
@@ -37,31 +39,37 @@ export const CartProvider = ({children}) => {
   }, [cartItems]);
 
   // Function to add an item to the cart
-  const addToCart = (item) => {
-    setCartItems((prevItems) => {
-      const itemExists = prevItems.some((cartItem) => cartItem.id === item.id);
+  const addToCart = item => {
+    setCartItems(prevItems => {
+      const itemExists = prevItems.some(cartItem => cartItem.id === item.id);
 
       if (itemExists) {
+        Alert.alert('Product already in cart!');
         return prevItems;
       }
 
       const updatedItems = [...prevItems, item];
+      Alert.alert('Product added to the cart!');
+
       return updatedItems;
     });
   };
 
   // Function to remove an item from the cart
-  const removeFromCart = (itemId) => {
-    setCartItems((prevItems) => prevItems.filter((item) => item.id !== itemId));
+  const removeFromCart = itemId => {
+    Alert.alert("Do you want to remove this item?")
+    setCartItems(prevItems => prevItems.filter(item => item.id !== itemId));
   };
 
   // Clear cart function
   const clearCart = () => {
+    Alert.alert("Do you want to clear the cart?")
     setCartItems([]);
   };
 
   return (
-    <CartContext.Provider value={{cartItems, addToCart, removeFromCart, clearCart}}>
+    <CartContext.Provider
+      value={{cartItems, addToCart, removeFromCart, clearCart}}>
       {children}
     </CartContext.Provider>
   );

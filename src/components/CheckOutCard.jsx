@@ -59,7 +59,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
   button: {
-    backgroundColor: '#DB312D',
+    backgroundColor: '#627E7C',
     borderRadius: 5,
     padding: 10,
     width: 120,
@@ -69,7 +69,7 @@ const styles = StyleSheet.create({
     marginRight: 10,
   },
   removeButton: {
-    backgroundColor: '#555',
+    backgroundColor: '#DB312D',
     borderRadius: 5,
     padding: 10,
     width: 120,

@@ -24,7 +24,7 @@ const CheckOut = ({route}) => {
 
   if (!cartItems || cartItems.length === 0) {
     return (
-      <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+      <View style={{flex: 1, justifyContent: 'center', alignItems: 'center' , backgroundColor: '#fff'}}>
         <Text style={{fontSize: 20, fontWeight: 'bold', color: '#DB312D'}}>
           No items in cart
         </Text>
@@ -36,8 +36,8 @@ const CheckOut = ({route}) => {
       <Text style={styles.text}>CheckOut</Text>
       <TouchableOpacity
         onPress={clearCart}
-        style={{backgroundColor: '#DB312D', padding: 10, borderRadius: 10}}>
-        <Text> Remove All </Text>
+        style={{backgroundColor: '#DB312D', padding: 10, borderRadius: 10 , marginHorizontal: 40, marginBottom: 20}}>
+        <Text style={{color: '#fff', textAlign: 'center'}}> Remove All </Text>
       </TouchableOpacity>
       <FlatList
         data={cartItems}
@@ -47,7 +47,7 @@ const CheckOut = ({route}) => {
             title={item.title}
             price={item.price}
             onPurchase={handlePurchase}
-            onRemove={handleRemove(item.id)}
+            onRemove={() => handleRemove(item.id)}
           />
         )}
         keyExtractor={item => item.id}
@@ -65,5 +65,6 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontSize: 20,
     fontWeight: 'bold',
+    marginBottom: 20,
   },
 });

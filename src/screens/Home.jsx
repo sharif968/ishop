@@ -19,10 +19,7 @@ export default function HomeScreen() {
   const {data: products, isLoading, isError} = useProducts();
   const {cartItems, addToCart} = useCart();
 
-  const handleAddToCart = (item) => {
-    addToCart(item);
-    Alert.alert('Product added to cart!');
-  };
+ 
   const navigation = useNavigation();
   const navigateToCheckout = () => {
     navigation.navigate('CheckOut', {cartItems});
@@ -52,12 +49,17 @@ export default function HomeScreen() {
                 justifyContent: 'space-between',
                 alignItems: 'center',
                 marginBottom: 20,
+                marginHorizontal: 10,
               }}>
-              <Text style={{fontSize: 24}}>All Products</Text>
-              <TouchableOpacity onPress={navigateToCheckout}>
+              <Text style={{fontSize: 24 ,fontWeight: 'bold'}}>All Products</Text>
+              <View>
+                <Text style={{fontSize: 20 ,fontWeight: 'bold' , position: 'absolute', top:-5 , right: 0}}>
+                  {cartItems.length }
+                </Text>
+              <TouchableOpacity style={{marginRight: 10 , position: 'relative'}} onPress={navigateToCheckout}>
                 <MaterrialIcons name="shopping-cart" size={30} color="#DB312D" />
-                {/* <Text style={{fontSize: 18}}>🛒 Cart</Text> */}
               </TouchableOpacity>
+              </View>
             </View>
           </>
         }
