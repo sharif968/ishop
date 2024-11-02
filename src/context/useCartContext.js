@@ -1,9 +1,9 @@
-import React, {createContext, useState, useEffect, useContext} from 'react';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import {Alert} from 'react-native';
-import {ToastAndroid} from 'react-native';
+import React, {createContext, useState, useEffect, useContext, Alert} from 'react';
+import AsyncStorage from "@react-native-async-storage/async-storage";
 // Create a CartContext
 const CartContext = createContext();
+
+const key = 'cartItems';
 
 // Custom hook to use the CartContext
 export const useCart = () => useContext(CartContext);
@@ -15,7 +15,7 @@ export const CartProvider = ({children}) => {
   useEffect(() => {
     const loadCartItems = async () => {
       try {
-        const storedCartItems = await AsyncStorage.getItem('cartItems');
+        const storedCartItems = await AsyncStorage.getItem(key);
         if (storedCartItems) {
           setCartItems(JSON.parse(storedCartItems));
         }
@@ -26,22 +26,11 @@ export const CartProvider = ({children}) => {
     loadCartItems();
   }, []);
 
-  // Save cart data to AsyncStorage whenever it changes
-  useEffect(() => {
-    const saveCartItems = async () => {
-      try {
-        await AsyncStorage.setItem('cartItems', JSON.stringify(cartItems));
-      } catch (error) {
-        console.error('Failed to save cart items to AsyncStorage', error);
-      }
-    };
-    saveCartItems();
-  }, [cartItems]);
 
   // Function to add an item to the cart
-  const addToCart = item => {
-    setCartItems(prevItems => {
-      const itemExists = prevItems.some(cartItem => cartItem.id === item.id);
+  const addToCart = (item) => {
+    setCartItems((prevItems) => {
+      const itemExists = prevItems.some((cartItem) => cartItem.id === item.id);
 
       if (itemExists) {
         Alert.alert('Product already in cart!');
@@ -49,10 +38,10 @@ export const CartProvider = ({children}) => {
       }
 
       const updatedItems = [...prevItems, item];
-      Alert.alert('Product added to the cart!');
-
       return updatedItems;
     });
+    await AsyncStorage.setItem(key,JSON.stringify(updatedItems));
+
   };
 
   // Function to remove an item from the cart
