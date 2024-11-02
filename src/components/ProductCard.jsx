@@ -1,6 +1,6 @@
 import { useNavigation } from '@react-navigation/native';
 import React from 'react';
-import { Dimensions, Image, StyleSheet, Text, TouchableOpacity, View,Alert } from 'react-native';
+import { Dimensions, Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons'; // for the cart icon
 import { useCart } from '../context/useCartContext';
 
@@ -12,7 +12,6 @@ const ProductCard = ({ item }) => {
 
   const handleAddToCart = () => {
     addToCart(item);
-    Alert.alert('Product added to cart!');
   };
 
   const navigation = useNavigation();
@@ -21,7 +20,7 @@ const ProductCard = ({ item }) => {
   return (
     <TouchableOpacity
       onPress={() => navigation.navigate('ProductDetails', {
-        item
+        item,
 
       })}
       style={styles.card}>

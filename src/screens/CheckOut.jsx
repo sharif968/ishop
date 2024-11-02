@@ -1,21 +1,20 @@
+import React from 'react';
 import {
-  Alert,
   FlatList,
   StyleSheet,
   Text,
   TouchableOpacity,
-  View,
+  View
 } from 'react-native';
-import React from 'react';
 import CheckOutCard from '../components/CheckOutCard';
-import {useCart} from '../context/useCartContext';
+import { useCart } from '../context/useCartContext';
 const CheckOut = ({route}) => {
   // const {cartItems} = route.params;
   const {removeFromCart, clearCart , cartItems} = useCart();
 
   const handleRemove = (itemId) => {
     removeFromCart(itemId);
-    Alert.alert('Product removed from cart!');
+    // Alert.alert('Product removed from cart!');
   };
 
   const handlePurchase = item => {

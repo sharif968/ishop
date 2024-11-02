@@ -1,7 +1,9 @@
-import React, {createContext, useState, useEffect, useContext, Alert} from 'react';
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import React, { createContext, useContext, useEffect, useState } from 'react';
 // Create a CartContext
 const CartContext = createContext();
+
+const key = 'cartItems';
 
 // Custom hook to use the CartContext
 export const useCart = () => useContext(CartContext);
@@ -13,7 +15,7 @@ export const CartProvider = ({children}) => {
   useEffect(() => {
     const loadCartItems = async () => {
       try {
-        const storedCartItems = await AsyncStorage.getItem('cartItems');
+        const storedCartItems = await AsyncStorage.getItem(key);
         if (storedCartItems) {
           setCartItems(JSON.parse(storedCartItems));
         }
@@ -24,30 +26,22 @@ export const CartProvider = ({children}) => {
     loadCartItems();
   }, []);
 
-  // Save cart data to AsyncStorage whenever it changes
-  useEffect(() => {
-    const saveCartItems = async () => {
-      try {
-        await AsyncStorage.setItem('cartItems', JSON.stringify(cartItems));
-      } catch (error) {
-        console.error('Failed to save cart items to AsyncStorage', error);
-      }
-    };
-    saveCartItems();
-  }, [cartItems]);
 
   // Function to add an item to the cart
-  const addToCart = (item) => {
+  const addToCart = async (item) => {
+    let updatedItems = [];
     setCartItems((prevItems) => {
       const itemExists = prevItems.some((cartItem) => cartItem.id === item.id);
-
       if (itemExists) {
         return prevItems;
       }
 
-      const updatedItems = [...prevItems, item];
+       updatedItems = [...prevItems, item];
+
       return updatedItems;
     });
+    await AsyncStorage.setItem(key,JSON.stringify(updatedItems));
+
   };
 
   // Function to remove an item from the cart

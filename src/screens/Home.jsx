@@ -1,36 +1,35 @@
-import {useNavigation} from '@react-navigation/native';
-import MaterrialIcons from 'react-native-vector-icons/MaterialIcons';
+import { useNavigation } from '@react-navigation/native';
 import {
   ActivityIndicator,
-
   FlatList,
   SafeAreaView,
-  Alert,
   StatusBar,
   Text,
   TouchableOpacity,
   View,
 } from 'react-native';
+import MaterrialIcons from 'react-native-vector-icons/MaterialIcons';
 import ProductCard from '../components/ProductCard';
-import {useProducts} from '../hooks/useProducts';
-import {useCart} from '../context/useCartContext';
+import { useCart } from '../context/useCartContext';
+import { useProducts } from '../hooks/useProducts';
 
 export default function HomeScreen() {
-  const {data: products, isLoading, isError} = useProducts();
-  const {cartItems, addToCart} = useCart();
+  const { data: products, isLoading, isError } = useProducts();
+  const { cartItems, addToCart } = useCart();
+  console.log('🚀 ~ HomeScreen ~ cartItems:', cartItems);
 
   const handleAddToCart = (item) => {
     addToCart(item);
-    Alert.alert('Product added to cart!');
+    // Alert.alert('Product added to cart!');
   };
   const navigation = useNavigation();
   const navigateToCheckout = () => {
-    navigation.navigate('CheckOut', {cartItems});
+    navigation.navigate('CheckOut', { cartItems });
   };
 
   if (isLoading) {
     return (
-      <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
         <ActivityIndicator size="large" color={'#DB312D'} />
       </View>
     );
@@ -41,7 +40,7 @@ export default function HomeScreen() {
   }
 
   return (
-    <SafeAreaView style={{flex: 1, padding: 12, backgroundColor: '#fff'}}>
+    <SafeAreaView style={{ flex: 1, padding: 12, backgroundColor: '#fff' }}>
       <StatusBar backgroundColor="#fff" barStyle="dark-content" />
       <FlatList
         ListHeaderComponent={
@@ -53,8 +52,9 @@ export default function HomeScreen() {
                 alignItems: 'center',
                 marginBottom: 20,
               }}>
-              <Text style={{fontSize: 24}}>All Products</Text>
+              <Text style={{ fontSize: 24 }}>All Products</Text>
               <TouchableOpacity onPress={navigateToCheckout}>
+                <Text>{cartItems.length}</Text>
                 <MaterrialIcons name="shopping-cart" size={30} color="#DB312D" />
                 {/* <Text style={{fontSize: 18}}>🛒 Cart</Text> */}
               </TouchableOpacity>
@@ -62,10 +62,10 @@ export default function HomeScreen() {
           </>
         }
         data={products}
-        contentContainerStyle={{paddingBottom: 100}}
-        renderItem={({item}) => (
+        contentContainerStyle={{ paddingBottom: 100 }}
+        renderItem={({ item }) => (
           <ProductCard
-           item={item}
+            item={item}
           />
         )}
         keyExtractor={item => item.id}
