@@ -1,10 +1,11 @@
 import {useNavigation} from '@react-navigation/native';
-import {useState} from 'react';
+import MaterrialIcons from 'react-native-vector-icons/MaterialIcons';
 import {
   ActivityIndicator,
-  Alert,
+
   FlatList,
   SafeAreaView,
+  Alert,
   StatusBar,
   Text,
   TouchableOpacity,
@@ -54,7 +55,8 @@ export default function HomeScreen() {
               }}>
               <Text style={{fontSize: 24}}>All Products</Text>
               <TouchableOpacity onPress={navigateToCheckout}>
-                <Text style={{fontSize: 18}}>🛒 Cart</Text>
+                <MaterrialIcons name="shopping-cart" size={30} color="#DB312D" />
+                {/* <Text style={{fontSize: 18}}>🛒 Cart</Text> */}
               </TouchableOpacity>
             </View>
           </>

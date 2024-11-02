@@ -1,4 +1,4 @@
-import React, {createContext, useState, useEffect, useContext} from 'react';
+import React, {createContext, useState, useEffect, useContext, Alert} from 'react';
 import AsyncStorage from "@react-native-async-storage/async-storage";
 // Create a CartContext
 const CartContext = createContext();
@@ -42,12 +42,10 @@ export const CartProvider = ({children}) => {
       const itemExists = prevItems.some((cartItem) => cartItem.id === item.id);
 
       if (itemExists) {
-        Alert.alert('This item is already in your cart!');
         return prevItems;
       }
 
       const updatedItems = [...prevItems, item];
-      Alert.alert('Product added to cart!');
       return updatedItems;
     });
   };
